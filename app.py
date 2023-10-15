@@ -19,3 +19,21 @@ connect_db(app)
 @app.route('/')
 def home_page():
     return render_template('index.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register_user():
+    form = UserForm()
+    if form.validate_on_submit():
+        name = form.username.data
+        pwd = form.password.data
+        user = User.register(name, pwd)
+
+        db.session.add(user)
+        db.session.commit()
+
+        session["user_id"] = user.id
+
+        return redirect('/profile')
+
+    return render_template('register.html', form=form)
+
