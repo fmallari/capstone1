@@ -3,12 +3,24 @@ from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
 
-bcrypt = Bcrypt
+bcrypt = Bcrypt()
 
 
 def connect_db(app):
     db.app = app
     db.init_app(app)
+
+class Workout(db.Model):
+    __tablename__ = "workout"
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    text = db.Column(db.Text, 
+                     nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user = db.relationship('User', backref="workouts")
+
 
 
 class User(db.Model):
