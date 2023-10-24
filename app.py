@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash
 # from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User, Workout
-from forms import UserForm
+from forms import UserForm, WorkoutForm
 
 app = Flask(__name__)
 app.app_context().push()
@@ -16,16 +16,21 @@ app.config["SECRET_KEY"] = "fitness"
 
 connect_db(app)
 
+##############################################################################
+# Register/Login/Logout 
+
 @app.route('/')
 def home_page():
     return render_template('index.html')
 
-@app.route('/profile')
+@app.route('/profile', methods=["GET", "POST"])
 def show_profile():
     if "user_id" not in session:
         flash("Login required")
         return redirect('/login')
-    return render_template('profile.html')
+    form = WorkoutForm()
+
+    return render_template('profile.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():

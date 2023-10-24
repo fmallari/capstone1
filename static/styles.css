@@ -1,0 +1,41 @@
+.bg-img {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    filter: brightness(0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.home-hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 10;
+    width: 100vw;
+    left: 0;
+    z-index: -1;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    text-shadow: 0 0 8px grey;
+}
+
+.home-hero h1 {
+    margin-bottom: 4em;
+}
+
+.home-hero .btn {
+    text-shadow: none;
+    position: relative;
+    z-index: 1;
+    width: 150px;
+  }
+
+h1 {
+    color: white;
+}

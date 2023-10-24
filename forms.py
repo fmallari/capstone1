@@ -7,3 +7,6 @@ class UserForm(FlaskForm):
     # namename = StringField("Last Name", validators=[InputRequired()])
     username = StringField("Username", validators=[InputRequired()])
     password = PasswordField("Password", validators=[InputRequired()])
+
+class WorkoutForm(FlaskForm):
+    text = StringField("Workout Post", validators=[InputRequired()])
