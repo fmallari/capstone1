@@ -1,7 +1,9 @@
-from flask import Flask, render_template, redirect, session, flash
+from flask import Flask, render_template, redirect, session, flash, g
 # from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User, Workout
 from forms import UserForm, WorkoutForm
+
+CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 app.app_context().push()
@@ -19,9 +21,30 @@ connect_db(app)
 ##############################################################################
 # Register/Login/Logout 
 
+@app.before_request
+def add_user_to_g():
+    """If logged in, add curr user to Flask global"""
+
+    if CURR_USER_KEY in session:
+        g.user = User.query.get(session[CURR_USER_KEY])
+
+    else:
+        g.user = None
+
+def do_login(user):
+    """Log in user"""
+
+    session[CURR_USER_KEY] = user.id
+
+def do_logout():
+    """Logout user"""
+
+    if CURR_USER_KEY in session:
+        del session[CURR_USER_KEY]
+
 @app.route('/')
 def home_page():
-    return render_template('index.html')
+    return render_template('home.html')
 
 @app.route('/profile', methods=["GET", "POST"])
 def show_profile():
@@ -34,6 +57,9 @@ def show_profile():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register_user():
+    """Handle user registration
+    """
+
     form = UserForm()
     if form.validate_on_submit():
         name = form.username.data
@@ -70,4 +96,4 @@ def login_user():
 def logout_user():
     session.pop('user_id')
     flash("Successfully logged out")
-    return redirect('/')
+    return redirect('/login')

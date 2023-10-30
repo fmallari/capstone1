@@ -1,25 +1,45 @@
-{% extends 'base.html' %}
-{% block title %}Fitness Frenzy{% endblock %}
-
+{% extends 'users/detail.html' %}
+{% block title %}LevelUp{% endblock %}
+()
 {% block content %}
 <h1>Profile Page</h1>
+<head>
+    <link rel="stylesheet" href="static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LevelUp</title>
+</head>
+<body>
+  <div class="columns-3">
+      <div class="bg-white"><h3>Daily Workouts</h3>
+        <input type="text"><input type="submit">
+          <ul><input type="checkbox">Some Text</ul>
+          <ul><input type="checkbox">Some Text</ul>
+          <ul><input type="checkbox">Some Text</ul>
+        </div>
+      <div class="bg-grey"><h3>Workout of the Day</h3><br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus qui, deleniti temporibus voluptate enim dignissimos ducimus esse laboriosam, assumenda odio accusantium quo repellat est velit debitis veritatis exercitationem culpa. Asperiores.</div>
+      <div class="bg-orange"><h3>Share Progress</h3>
+        
+        <form method="POST">
 
-<form method="POST"></form>
-
-{{ form.hidden_tag() }}
-
-    {% for field in form 
-        if field.widget.input_type != 'hidden' %}
-    <p>
-        {{ field.label }}
-        {{ field(class_="form-control") }}
-
-        {% for error in field.errors %}
-        <span class="form-text text-danger">{{ error }}</span>
-        {% endfor %}
-    </p>
-    {% endfor %}
-
-    <button class="btn btn-success" type="submit">Post Workout</button>
+        {{ form.hidden_tag() }}
+        
+            {% for field in form 
+                if field.widget.input_type != 'hidden' %}
+            <p>
+                {{ field.label }}
+                {{ field(class_="form-control") }}
+        
+                {% for error in field.errors %}
+                <span class="form-text text-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            {% endfor %}
+        
+            <button class="btn btn-success" type="submit"> Let's Go! </button></div>
+          </form>
+  </div>
+</body>
+</html>
 
 {% endblock %}

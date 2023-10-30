@@ -22,7 +22,6 @@ class Workout(db.Model):
     user = db.relationship('User', backref="workouts")
 
 
-
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer,
@@ -35,12 +34,16 @@ class User(db.Model):
 
     password = db.Column(db.Text,
                          nullable=False)
+    
+    # email = db.Column(db.Text,
+    #                    nullable=False,
+    #                    unique=True,
 
     @classmethod
-    def register(cls, username, pwd):
+    def register(cls, username, password):
         """Register user with hashed pwd and return user"""
 
-        hashed = bcrypt.generate_password_hash(pwd)
+        hashed = bcrypt.generate_password_hash(password)
 
         # turn bytestring into normal unicode utf8 string
         hashed_utf8 = hashed.decode("utf8")
@@ -49,7 +52,7 @@ class User(db.Model):
         return cls(username=username, password=hashed_utf8)
 
     @classmethod
-    def authenticate(cls, username, pwd):
+    def authenticate(cls, username, password):
         """Validate that user exists and password is correct
         
         Return user if valid; else return False
@@ -57,7 +60,7 @@ class User(db.Model):
 
         u = User.query.filter_by(username=username).first()
 
-        if u and bcrypt.check_password_hash(u.password, pwd):
+        if u and bcrypt.check_password_hash(u.password, password):
             # return user instance
 
             return u
