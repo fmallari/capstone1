@@ -17,14 +17,14 @@
           <ul><input type="checkbox">Some Text</ul>
           <ul><input type="checkbox">Some Text</ul>
         </div>
-      <div class="bg-grey"><h3>Workout of the Day</h3><br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus qui, deleniti temporibus voluptate enim dignissimos ducimus esse laboriosam, assumenda odio accusantium quo repellat est velit debitis veritatis exercitationem culpa. Asperiores.</div>
-      <div class="bg-orange"><h3>Share Progress</h3>
+      <!-- <div class="bg-grey"><h3>Workout of the Day</h3><br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus qui, deleniti temporibus voluptate enim dignissimos ducimus esse laboriosam, assumenda odio accusantium quo repellat est velit debitis veritatis exercitationem culpa. Asperiores.</div>
+      <div class="bg-orange"><h3>Share Progress</h3> -->
         
         <form method="POST">
 
         {{ form.hidden_tag() }}
         
-            {% for field in form 
+            {% for field in form  
                 if field.widget.input_type != 'hidden' %}
             <p>
                 {{ field.label }}

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash, g
 # from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db, db, User, Workout
-from forms import UserForm, WorkoutForm
+from forms import UserForm, WorkoutForm, MessageForm
 
 CURR_USER_KEY = "curr_user"
 
@@ -97,3 +97,9 @@ def logout_user():
     session.pop('user_id')
     flash("Successfully logged out")
     return redirect('/login')
+
+
+#################################################
+
+# Posts 
+
