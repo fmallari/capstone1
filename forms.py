@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField
+from wtforms import StringField, PasswordField, IntegerField, TextAreaField, DateTimeField
 from wtforms.validators import InputRequired, DataRequired
 
 class AddUserForm(FlaskForm):
@@ -17,9 +17,22 @@ class UserForm(FlaskForm):
 
 class WorkoutForm(FlaskForm):
     """Workout Post to li"""
-    text = StringField("Workout Post", validators=[InputRequired()])
+    exercise = StringField("Exercise Name")
+    weight = StringField("Weight")
+    reps = IntegerField("Reps")
+    sets = IntegerField("Sets")
+    date = StringField("Date")
 
-class MessageForm(FlaskForm):
-    """Form for sharing post"""
+class NutritionForm(FlaskForm):
+    """Workout Post to li"""
+    food = StringField("Food Name")
+    protein = IntegerField("Protein")
+    carbs = IntegerField("Carbohydrates")
+    fats = IntegerField("Fats")
+    calories = IntegerField("Calories")
+    date = StringField("Date")
 
-    text = TextAreaField('text', validators=[DataRequired()])
+# class MessageForm(FlaskForm):
+#     """Form for sharing post"""
+
+#     text = TextAreaField('text', validators=[DataRequired()])

@@ -7,23 +7,50 @@ bcrypt = Bcrypt()
 
 
 def connect_db(app):
+    """Connect to database"""
     db.app = app
     db.init_app(app)
 
 class Workout(db.Model):
+    """Fitness tracker"""
+
     __tablename__ = "workout"
+
     id = db.Column(db.Integer,
                    primary_key=True,
                    autoincrement=True)
-    text = db.Column(db.Text, 
-                     nullable=False)
+    exercise = db.Column(db.Text, nullable=False)
+    weight = db.Column(db.Integer, nullable=False)
+    reps = db.Column(db.Integer, nullable=False, default=10)
+    sets = db.Column(db.Integer, nullable=False, default=3)
+    date = db.Column(db.Text)
+    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref="workout")
 
-    user = db.relationship('User', backref="workouts")
+class Nutrition(db.Model):
+    """Fitness tracker"""
 
+    __tablename__ = "nutrition"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    food = db.Column(db.Text, nullable=False)
+    protein = db.Column(db.Integer, nullable=False)
+    carbs = db.Column(db.Integer, nullable=False)
+    fats = db.Column(db.Integer, nullable=False)
+    calories = db.Column(db.Integer, nullable=False)
+    date = db.Column(db.Text)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref="nutrition")
 
 class User(db.Model):
+    """Add user information into db"""
+
     __tablename__ = "users"
+
     id = db.Column(db.Integer,
                    primary_key=True,
                    autoincrement=True)
